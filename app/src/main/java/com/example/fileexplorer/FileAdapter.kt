@@ -10,6 +10,7 @@ import java.io.File
 class FileAdapter(
     private val context: Context,
     private val fileList: List<File>,
+    private val listener: OnFileSelectedListener,
     ) : RecyclerView.Adapter<FileViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder
@@ -38,6 +39,15 @@ class FileAdapter(
         }
 
         setImages(currentFile.name, holder)
+
+        holder.container.setOnClickListener {
+            listener.onFileClicked(currentFile)
+        }
+
+        holder.container.setOnLongClickListener {
+            listener.onFileLongClicked(currentFile)
+            true
+        }
     }
 
     override fun getItemCount(): Int {
