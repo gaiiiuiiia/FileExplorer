@@ -27,10 +27,12 @@ class FileAdapter(
 
         var items = 0
         if (currentFile.isDirectory) {
-            val files = currentFile.listFiles()!!
-            for (singleFile: File in files) {
-                if (!singleFile.isHidden) {
-                    items++
+            val files = currentFile.listFiles()
+            files?.let {
+                for (singleFile: File in files) {
+                    if (!singleFile.isHidden) {
+                        items++
+                    }
                 }
             }
             holder.tvSize.text = items.toString().plus(" files")
@@ -45,7 +47,7 @@ class FileAdapter(
         }
 
         holder.container.setOnLongClickListener {
-            listener.onFileLongClicked(currentFile)
+            listener.onFileLongClicked(currentFile, position)
             true
         }
     }

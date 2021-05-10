@@ -6,5 +6,5 @@ interface OnFileSelectedListener
 {
     fun onFileClicked(file: File)
 
-    fun onFileLongClicked(file: File)
+    fun onFileLongClicked(file: File, position: Int)
 }
